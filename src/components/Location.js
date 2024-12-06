@@ -64,12 +64,12 @@ const Location = () => {
     setSelectedState("");
     setSelectedCity("");
     setStates([]);
-    setCountries([]);
+    setCities([]);
   }
   function handleStateChange(e) {
     setSelectedState(e.target.value);
     setSelectedCity("");
-    setCountries([]);
+    setCities([]);
   }
   function handleCityChange(e) {
     setSelectedCity(e.target.value);
