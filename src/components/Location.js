@@ -63,10 +63,13 @@ const Location = () => {
     setSelectedCountry(e.target.value);
     setSelectedState("");
     setSelectedCity("");
+    setStates([]);
+    setCountries([]);
   }
   function handleStateChange(e) {
     setSelectedState(e.target.value);
     setSelectedCity("");
+    setCountries([]);
   }
   function handleCityChange(e) {
     setSelectedCity(e.target.value);
