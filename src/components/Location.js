@@ -117,7 +117,7 @@ const Location = () => {
           You selected <span style={{ fontSize: "2rem" }}>{selectedCity}</span>,{" "}
           <span style={{ color: "gray" }}>
             {" "}
-            {selectedState},{selectedCountry}
+            {selectedState}, {selectedCountry}
           </span>
         </h2>
       )}
