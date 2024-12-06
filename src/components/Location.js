@@ -13,11 +13,15 @@ const Location = () => {
   }, []);
 
   useEffect(() => {
-    fetchStates(selectedCountry);
+    if (selectedCountry) {
+      fetchStates(selectedCountry);
+    }
   }, [selectedCountry]);
 
   useEffect(() => {
-    fetchCities(selectedCountry, selectedState);
+    if (selectedState) {
+      fetchCities(selectedCountry, selectedState);
+    }
   }, [selectedState]);
 
   //fetch countries data
@@ -55,44 +59,65 @@ const Location = () => {
     }
   }
 
+  function handleCountryChange(e) {
+    setSelectedCountry(e.target.value);
+    setSelectedState("");
+    setSelectedCity("");
+  }
+  function handleStateChange(e) {
+    setSelectedState(e.target.value);
+    setSelectedCity("");
+  }
+  function handleCityChange(e) {
+    setSelectedCity(e.target.value);
+  }
+
   return (
     <div>
       <h1>Select Location</h1>
-      <select
-        value={selectedCountry}
-        onChange={(e) => setSelectedCountry(e.target.value)}
-      >
-        <option value="" disabled>
-          Select Country
-        </option>
-        {countries.map((ele, idx) => (
-          <option key={idx}>{ele}</option>
-        ))}
-      </select>
-      <select
-        value={selectedState}
-        onChange={(e) => setSelectedState(e.target.value)}
-        disabled={!selectedCountry}
-      >
-        <option value="" disabled>
-          Select State
-        </option>
-        {states.map((ele, idx) => (
-          <option key={idx}>{ele}</option>
-        ))}
-      </select>
-      <select
-        value={selectedCity}
-        onChange={(e) => setSelectedCity(e.target.value)}
-        disabled={!selectedState}
-      >
-        <option value="" disabled>
-          Select City
-        </option>
-        {cities.map((ele, idx) => (
-          <option key={idx}>{ele}</option>
-        ))}
-      </select>
+      <div>
+        <select value={selectedCountry} onChange={handleCountryChange}>
+          <option value="" disabled>
+            Select Country
+          </option>
+          {countries.map((ele, idx) => (
+            <option key={idx}>{ele}</option>
+          ))}
+        </select>
+        <select
+          value={selectedState}
+          onChange={handleStateChange}
+          disabled={!selectedCountry}
+        >
+          <option value="" disabled>
+            Select State
+          </option>
+          {states.map((ele, idx) => (
+            <option key={idx}>{ele}</option>
+          ))}
+        </select>
+        <select
+          value={selectedCity}
+          onChange={handleCityChange}
+          disabled={!selectedState}
+        >
+          <option value="" disabled>
+            Select City
+          </option>
+          {cities.map((ele, idx) => (
+            <option key={idx}>{ele}</option>
+          ))}
+        </select>
+      </div>
+      {selectedCity && (
+        <h2>
+          You selected <span style={{ fontSize: "2rem" }}>{selectedCity}</span>,{" "}
+          <span style={{ color: "gray" }}>
+            {" "}
+            {selectedState},{selectedCountry}
+          </span>
+        </h2>
+      )}
     </div>
   );
 };
